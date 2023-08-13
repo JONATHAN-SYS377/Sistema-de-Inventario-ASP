@@ -1,0 +1,46 @@
+html {
+    font-size: 14px;
+    background-color: #13363D
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: #13363D;
+    overflow-y: scroll;
+    padding:0px;
+}
+
+.main {
+    min-height:550px;
+    height: 100vh;
+    margin:0px;
+    margin-top:60px;
+}
+
+.header {
+    background-color: #032830;
+    position: fixed;
+    z-index: 99999999999999999999999999999999999;
+    top: 0 !important;
+    width: 100%;
+}
+
+.botonOpciones {
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-left: 5px
+}

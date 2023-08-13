@@ -1,0 +1,410 @@
+﻿@model IEnumerable<Sistema_de_Inventario_ASP.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index Activos";
+}
+
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/Stilos.css" asp-append-version="true" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+<div class="bodyAgenda">
+    <div class="bodyAgenda">
+        <div class="row">
+            <div class="col-md-2 col-12 EspacioCol">
+                <a asp-action="Home" asp-controller="Home">
+                <img class=" col-4 ImagenP2" src="~/Inventory-PNG-Pic.png" alt="Logo" >
+                </a>
+            </div>
+            <div class="col-md-8 col-12 EspacioCol  d-flex align-items-center justify-content-center">
+                <h2>Lista de productos Activos</h2>
+            </div>
+        </div>
+
+
+    </div>
+
+    <hr />
+
+    <div class="Espacio">
+        <a asp-action="CrearProducto" asp-controller="Productos" class="btn btn-outline-primary  btn-sm boton-efecto">
+            <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
+            </svg>
+            Registrar Producto
+        </a>
+    </div>
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+
+
+
+            @foreach (var Categorias in Model.GroupBy(p => p.Categoria.NombreCategoria))
+            {
+                <div class="offser-12 BorderRadios">
+                    <div class="card ">
+                        <div class="card-header cardHeaderPersonalisada">
+                            <h3 class="textocolor">
+                                <strong>
+                                    Lista de Productos de la categoria @Categorias.Key <!-- Nombre de la categoría -->
+                                </strong>
+                            </h3>
+                        </div>
+                        <div class=" card-body bodyAgenda2">
+                            <div class="table-responsive">
+
+                                <table class="table tables table-bordered" id="tbProducto_@Categorias.Key" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="text-white">
+                                            <th class="Celdas">
+                                                Producto
+                                            </th>
+                                            <th>
+                                                Costo U.
+                                            </th>
+                                            <th>
+                                                Impuesto 13%
+                                            </th>
+                                            <th>
+                                                Precio
+                                            </th>
+                                            
+                                            <th>
+                                                Utilidad
+                                            </th>
+                                            <th>
+                                                Descuento
+                                            </th>
+                                            <th>
+                                                Existencia
+                                            </th>
+                                            <th>
+                                                Categoria
+                                            </th>
+                                            <th>
+                                                Estado
+                                            </th>
+                                            <th>
+                                                Opciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Categorias)
+                                        {
+                                            <tr class="odd text-center">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                                </td>
+                                                <td>
+                                                    ₡  @Html.DisplayFor(modelItem => item.Costo)
+                                                </td>
+                                                <td>
+                                                    ₡  @Html.DisplayFor(modelItem => item.Impuesto)
+                                                </td>
+                                                <td>
+                                                    ₡  @Html.DisplayFor(modelItem => item.PrecioVenta)
+                                                </td>
+                                                
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Utilidad) %
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Descuento) %
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CantidadActual)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Categoria.NombreCategoria)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
+                                                </td>
+                                                <td style="padding: 7px 0px;">
+                                                    <a type="button" class="btn btn-outline-warning btn-sm botonOpciones " asp-action="EditarProducto" asp-controller="Productos"
+                                                       asp-route-id="@item.IDCodigo">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-fill ajustarIconos" viewBox="0 0 16 16">
+                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                                        </svg>
+
+                                                    </a>
+                                                    <button type="button" class="btn btn-outline-primary btn-sm botonOpciones" data-bs-toggle="modal" data-bs-target="#ModalDetalles"
+                                                            data-id="@item.IDCodigo"
+                                                            data-nombre="@item.Nombre"
+                                                            data-costo="@item.Costo"
+                                                            data-impuesto="@item.Impuesto"
+                                                            data-precioventa="@item.PrecioVenta"
+                                                            data-descuento="@item.Descuento"
+                                                            data-utilidad="@item.Utilidad"
+                                                            data-cantidad="@item.CantidadActual"
+                                                            data-categoria="@item.Categoria.NombreCategoria"
+                                                            data-estado="@item.Estado.NombreEstado">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-info-square ajustarIconos" viewBox="0 0 16 16">
+                                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg>
+
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-danger btn-sm botonOpciones" data-bs-toggle="modal" data-bs-target="#ModalEliminar" asp-action="EliminarProducto" asp-controller="Productos" asp-route-id="@item.IDCodigo"
+                                                            data-id="@item.IDCodigo"
+                                                            data-nombre="@item.Nombre"
+                                                            data-costo="@item.Costo"
+                                                            data-impuesto="@item.Impuesto"
+                                                            data-precioventa="@item.PrecioVenta"
+                                                            data-descuento="@item.Descuento"
+                                                            data-utilidad="@item.Utilidad"
+                                                            data-cantidad="@item.CantidadActual"
+                                                            data-categoria="@item.Categoria.NombreCategoria"
+                                                            data-estado="@item.Estado.NombreEstado">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash3-fill ajustarIconos" viewBox="0 0 16 16">
+                                                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                        </svg>
+
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            }
+            
+            @*/////metodo para la paguinacion y filtrado*@
+            @foreach (var Categorias in Model.GroupBy(p => p.Categoria.NombreCategoria))
+            {
+                <script>
+                    $('#tbProducto_@Categorias.Key').DataTable({
+                        language: {
+                            "decimal": "",
+                            "emptyTable": "No hay información",
+                            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                            "infoPostFix": "",
+                            "thousands": ",",
+                            "lengthMenu": "Mostrar _MENU_ Entradas",
+                            "loadingRecords": "Cargando...",
+                            "processing": "Procesando...",
+                            "search": "Buscar:",
+                            "zeroRecords": "Sin resultados encontrados",
+                            "paginate": {
+                                "first": "Primero",
+                                "last": "Ultimo",
+                                "next": "Siguiente",
+                                "previous": "Anterior"
+                            }
+                        }
+                    });
+                </script>
+            }
+        }
+        else
+        {
+            <p>@ViewBag.Mensaje</p>
+        }
+
+        <div>
+            <a asp-action="Home" asp-controller="Home" class="btn btn-outline-primary AjustarBotones">Regresar</a>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="modal fade " id="ModalDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content Modales">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5 textocolor" id="exampleModalLabel">Detalles del Producto Seleccionado</h1>
+                <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" aria-label="Close">
+                    X
+                </button>
+            </div>
+            <div class="modal-dialog modal-dialog-scrollable AjustarCuerpoModal">
+                <ul class="list-group">
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Producto:</strong><span id="detalle-nombre"></span>
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Costo Unitario: </strong>₡ <span id="detalle-costo"></span>
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Impuesto Aplicado 13%: </strong>₡ <span id="detalle-impuesto"></span>
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Precio de venta: </strong>₡ <span id="detalle-precioventa"></span>
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Descuento: </strong><span id="detalle-descuento">%</span>%
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Utilidad: </strong><span id="detalle-utilidad"></span>%
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Cantidad: </strong><span id="detalle-cantidad"></span>
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Categoria: </strong><span id="detalle-categoria"></span>
+                    </li>
+                    <li class="list-group-item ColorLista">
+                        <strong class="AjustarListas"> Estado: </strong><span id="detalle-estado"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class=" modal-footers BorderTop">
+                <button style="border-radius: 10px" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+                        <path d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                        <path d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
+                    </svg>
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="ModalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content Modales">
+            <div class="modal-header BorderBotton">
+                <h1 class="modal-title fs-5 textocolor" id="exampleModalLabel">Eliminar Producto Seleccionado</h1>
+                <button type="button" class="btn btnCerrar" data-bs-dismiss="modal" aria-label="Close">
+                    X
+                </button>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Producto:</strong><span id="eliminar-nombre"></span>
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Costo Unitario: </strong>₡ <span id="eliminar-costo"></span>
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Impuesto Aplicado 13%: </strong>₡ <span id="eliminar-impuesto"></span>
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Precio de venta: </strong>₡ <span id="eliminar-precio"></span>
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Descuento: </strong><span id="eliminar-descunto"></span>%
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Utilidad: </strong><span id="eliminar-utilidad"></span>%
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Cantidad: </strong><span id="eliminar-cantidad"></span>
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Categoria: </strong><span id="eliminar-categoria"></span>
+                </li>
+                <li class="list-group-item ColorLista">
+                    <strong class="AjustarListas"> Estado: </strong><span id="eliminar-estado"></span>
+                </li>
+            </ul>
+            <div class="BorderTop modal-footers">
+                <form asp-action="EliminarProducto" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este Producto?');">
+                    <input type="hidden" name="Id" />
+                    <div class="d-flex justify-content-between">
+                        <button style="border-radius: 10px" type="button" class="btn btn-outline-danger  " data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+                                <path d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                                <path d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
+                            </svg>
+                            Cerrar
+                        </button>
+                        <button style="border-radius: 10px" type="submit" class="btn btn-outline-danger EspacioBotonModal">
+                            <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg>
+                            Eliminar Producto
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+
+
+
+
+        ///metodo para mostrar los datos mediante el ID del contacto para mostrarlos en el Modal Detalles
+        $(document).ready(function () {
+            // Cuando se muestra el modal de detalles
+            $('#ModalDetalles').on('show.bs.modal', function (event) {
+                // Obtener el botón que activó el modal
+                var button = $(event.relatedTarget);
+
+                // Seleccionar el modal
+                var modal = $(this);
+
+                // Asignar los valores a los elementos en el modal
+                modal.find('#detalle-nombre').text(button.data('nombre'));
+                modal.find('#detalle-costo').text(button.data('costo'));
+                modal.find('#detalle-impuesto').text(button.data('impuesto'));
+                modal.find('#detalle-precioventa').text(button.data('precioventa'));
+                modal.find('#detalle-descuento').text(button.data('descuento'));
+                modal.find('#detalle-utilidad').text(button.data('utilidad'));
+                modal.find('#detalle-cantidad').text(button.data('cantidad'));
+                modal.find('#detalle-categoria').text(button.data('categoria'));
+                modal.find('#detalle-estado').text(button.data('estado'));
+            });
+        });
+
+
+        $(document).ready(function () {
+            // Cuando se muestra el modal de eliminación
+            $('#ModalEliminar').on('show.bs.modal', function (event) {
+                // Obtener el botón que activó el modal
+                var button = $(event.relatedTarget);
+
+                // Obtener los datos personalizados del botón mediante atributos de datos
+                var id = button.data('id');
+                var nombre = button.data('nombre');
+                var costo = button.data('costo');
+                var impuesto = button.data('impuesto');
+                var precioventa = button.data('precioventa');
+                var descuento = button.data('descuento');
+                var utilidad = button.data('utilidad');
+                var cantidad = button.data('cantidad');
+                var categoria = button.data('categoria');
+                var estado = button.data('estado');
+
+                // Seleccionar el modal
+                var modal = $(this);
+
+                // Asignar los valores a los elementos en el modal
+                modal.find('input[name="Id"]').val(id);
+                modal.find('#eliminar-nombre').text(nombre);
+                modal.find('#eliminar-costo').text(costo);
+                modal.find('#eliminar-impuesto').text(impuesto);
+                modal.find('#eliminar-precio').text(precioventa);
+                modal.find('#eliminar-descuento').text(descuento);
+                modal.find('#eliminar-utilidad').text(utilidad);
+                modal.find('#eliminar-cantidad').text(cantidad);
+                modal.find('#eliminar-categoria').text(categoria);
+                modal.find('#eliminar-estado').text(estado);
+            });
+        });
+    </script>
+
+}

@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Home Inventario";
+}
+
+<link rel="stylesheet" href="~/css/Stilos.css" asp-append-version="true" />
+
+
+
+<div class="container-fluid ">
+
+    <div class="bodyAgenda">
+        <div class="row">
+            <div class="col-md-2 col-12 EspacioCol">
+                <a asp-action="Home" asp-controller="Home">
+                    <img class=" col-4 ImagenP2" src="~/Inventory-PNG-Pic.png" alt="Logo">
+                </a>
+            </div>
+            <div class="col-md-8 col-12 EspacioCol  d-flex align-items-center justify-content-center">
+                <h2 >Sistema de Control de Inventario</h2>
+            </div>
+        </div>
+
+
+    </div>
+    <hr />
+    <div class="accordion ColorAcordeon" id="accordionExample">
+
+        <div class="accordion-item ColorAcordeon">
+            <h2 class="accordion-header">
+                <button class="accordion-button ColorAcordeon2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   Menu Productos
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse hide" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div>
+                        <a asp-action="CrearProducto" asp-controller="Productos" class="btn btn-outline-primary  btn-sm boton-efecto AjustarBotones2">
+                            <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
+                            </svg>
+                            Registrar Producto
+                        </a>
+                        <a asp-action="IndexActivos" asp-controller="Productos" class="btn btn-outline-primary  btn-sm boton-efecto AjustarBotones2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+                                <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
+                            </svg>
+                            Ver Productos Activos
+                        </a>
+                        <a asp-action="IndexInactivos" asp-controller="Productos" class="btn btn-outline-primary  btn-sm boton-efecto AjustarBotones2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+                                <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
+                            </svg>
+                            Ver Productos Inactivos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item ColorAcordeon">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed ColorAcordeon2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Menu Categorias
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <a asp-action="CrearCategorias" asp-controller="Categorias" class="btn btn-outline-primary  btn-sm boton-efecto AjustarBotones2">
+                        <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
+                        </svg>
+                        Registrar Nueva Categoria
+                    </a>
+                    <a asp-action="IndexCategorias" asp-controller="Categorias" class="btn btn-outline-primary  btn-sm boton-efecto AjustarBotones2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+                            <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
+                        </svg>        Ver Categorias
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+
+
+}

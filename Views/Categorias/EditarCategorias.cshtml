@@ -1,0 +1,57 @@
+﻿@model Sistema_de_Inventario_ASP.Models.Categoria
+
+@{
+    ViewData["Title"] = "Editar Categorias";
+}
+
+<link rel="stylesheet" href="~/css/Stilos.css" asp-append-version="true" />
+
+
+<div class="bodyAgenda">
+    <div class="row">
+        <div class="col-md-2 col-12 EspacioCol">
+            <a asp-action="Home" asp-controller="Home">
+                <img class=" col-4 ImagenP2" src="~/Inventory-PNG-Pic.png" alt="Logo">
+            </a>
+        </div>
+        <div class="col-md-8 col-12 EspacioCol  d-flex align-items-center justify-content-center">
+            <h1>Registro de Categorias</h1>
+        </div>
+    </div>
+    <div class="row EspacioRow">
+        <div class="col-md-4">
+            <br />
+        </div>
+        <div class="col-md-4" style="padding-left:20px;">
+            <form asp-action="EditarCategorias">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NombreCategoria" class="control-label"></label>
+                    <input asp-for="NombreCategoria" class="form-control" />
+                    <span asp-validation-for="NombreCategoria" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class=" btn btn-outline-info  mx-auto d-block AjustarBotones">
+                        <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
+                            <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
+                        </svg>
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div>
+            <a class="btn btn-outline-primary AjustarBotones" asp-action="IndexCategorias" asp-controller="Categorias">Regresar</a>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

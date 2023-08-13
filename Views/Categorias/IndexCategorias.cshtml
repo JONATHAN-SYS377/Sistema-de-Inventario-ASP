@@ -1,0 +1,269 @@
+﻿@model IEnumerable<Sistema_de_Inventario_ASP.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+}
+<link rel="stylesheet" href="~/css/Stilos.css" asp-append-version="true" />
+
+<div class="bodyAgenda">
+    <div class="bodyAgenda">
+        <div class="row">
+            <div class="col-md-2 col-12 EspacioCol">
+                <a asp-action="Home" asp-controller="Home">
+                    <img class=" col-4 ImagenP2" src="~/Inventory-PNG-Pic.png" alt="Logo">
+                </a>
+            </div>
+            <div class="col-md-8 col-12 EspacioCol  d-flex align-items-center justify-content-center">
+                <h2>Listado de Categorias</h2>
+            </div>
+        </div>
+
+
+    </div>
+
+    <hr />
+    <div class="Espacio">
+
+        <a class="btn btn-outline-primary  btn-sm boton-efecto" asp-action="CrearCategorias" asp-controller="Categorias">
+            <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
+            </svg>
+            Registrar Categoria
+        </a>
+
+    </div>
+    <div class="row">
+        <div class="offser-12 BorderRadios">
+            <div class="card ">
+                <div class="card-header cardHeaderPersonalisada">
+                    <h3 class="textocolor">
+                        <strong>
+                            Lista de Categorias registradas
+                        </strong>
+                    </h3>
+                </div>
+                <div class=" card-body bodyAgenda">
+                    <div class="table-responsive">
+                        @if (Model.Count() > 0)
+                        {
+                            <table class="table tables table-bordered" id="tbCategorias" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-white odd text-center">
+                                        <th class="">
+                                            @Html.DisplayNameFor(model => model.NombreCategoria)
+                                        </th>
+                                        <th>
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="odd text-center">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NombreCategoria)
+                                            </td>
+                                            <td style="padding:0px;">
+                                                <a type="button" class="btn btn-outline-warning btn-sm botonOpciones " asp-action="EditarCategorias" asp-controller="Categorias"
+                                                   asp-route-id="@item.Id">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-fill ajustarIconos" viewBox="0 0 16 16">
+                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                                    </svg>
+
+                                                </a>
+
+                                                <button class="btn btn-outline-primary btn-sm botonOpciones" type="button" data-bs-toggle="offcanvas" data-bs-target="#CanvasDetalle" aria-controls="offcanvasRight"
+                                                        data-id="@item.Id"
+                                                        data-nombre="@item.NombreCategoria">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-info-square ajustarIconos" viewBox="0 0 16 16">
+                                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                    </svg>
+                                                </button>
+
+                                                <button class="btn btn-outline-danger btn-sm botonOpciones" type="button" data-bs-toggle="offcanvas" data-bs-target="#CanvasEliminar" aria-controls="offcanvasRight"
+                                                        data-id="@item.Id"
+                                                        data-nombre="@item.NombreCategoria">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash3-fill ajustarIconos" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }else
+                        {
+                            <p>No hay datos disponibles.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Home" asp-controller="Home" class="btn btn-outline-primary AjustarBotones">Regresar</a>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="AjustarCanvaCrear">
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="CanvasDetalle" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header ColorAcordeon2">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Registrar Categoria</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            <strong class="AjustarListas"> Categoria:</strong>
+                        </dt>
+                        <dd class="col-sm-6">
+                            <span id="detalle-Categoria"></span>
+                        </dd>
+                    </dl>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="AjustarCanvaCrear">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="CanvasEliminar" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header ColorAcordeon2">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Eliminar Categoria</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            <strong class="AjustarListas"> Categoria:</strong>
+                        </dt>
+                        <dd class="col-sm-6">
+                            <span id="detalle-Categoria-eliminar"></span>
+                        </dd>
+                    </dl>
+
+                </div>
+                <div class="BorderTop modal-footers">
+                <form asp-action="EliminarCategoria" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este Producto?');">
+                    <input type="hidden" name="Id" />
+                    <div class="d-flex justify-content-between">
+                        <button style="border-radius: 10px" type="button" class="btn btn-outline-danger  " data-bs-dismiss="offcanvas">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+                                <path d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                                <path d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z" />
+                            </svg>
+                            Cerrar
+                        </button>
+                        <button style="border-radius: 10px" type="submit" class="btn btn-outline-danger EspacioBotonModal">
+                            <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg>
+                            Eliminar
+                        </button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+@section Scripts{
+    <script>
+
+        ///metodo para la paguinacion y filtrado
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tbCategorias').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+
+        
+
+
+
+        ///metodo para mostrar los datos mediante el ID del contacto para mostrarlos en el Canvas Detalles
+        $(document).ready(function () {
+            // Capturar el clic en el botón de información
+            $(document).on('click', '[data-bs-target="#CanvasDetalle"]', function () {
+                var categoriaId = $(this).data('id'); // Obtener el ID de la categoría
+                var nombreCategoria = $(this).data('nombre'); // Obtener el nombre de la categoría
+
+                // Asignar los detalles al canvas
+                $('#detalle-Categoria').text(nombreCategoria);
+
+                // Abrir el canvas
+                var offcanvas = new bootstrap.Offcanvas(document.getElementById("CanvasDetalle"));
+                offcanvas.show();
+            });
+        });
+
+
+        $(document).ready(function () {
+            // Capturar el clic en el botón de eliminar
+            $(document).on('click', '[data-bs-target="#CanvasEliminar"]', function () {
+                var categoriaId = $(this).data('id'); // Obtener el ID de la categoría
+                var nombreCategoria = $(this).data('nombre'); // Obtener el nombre de la categoría
+
+                // Asignar los detalles al modal de eliminación
+                $('#detalle-Categoria-eliminar').text(nombreCategoria);
+
+                // Asignar el ID de la categoría al campo de formulario oculto
+                $('[name="Id"]').val(categoriaId);
+
+                // Abrir el modal de eliminación
+                var offcanvas = new bootstrap.Offcanvas(document.getElementById("CanvasEliminar"));
+                offcanvas.show();
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

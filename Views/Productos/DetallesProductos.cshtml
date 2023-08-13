@@ -1,0 +1,73 @@
+﻿@model Sistema_de_Inventario_ASP.Models.Producto
+
+@{
+    ViewData["Title"] = "Detalle Producto";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Costo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Costo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioVenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrecioVenta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Utilidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Utilidad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Impuesto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Impuesto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descuento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descuento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CantidadActual)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CantidadActual)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoria.NombreCategoria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Estado.NombreEstado)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IDCodigo">Edit</a> |
+    <a asp-action="Home" asp-controller="Home">Back to List</a>
+</div>
+
